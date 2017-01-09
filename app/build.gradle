@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+    defaultConfig {
+        applicationId "com.knowledge.health"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+//        为了优化apk大小，只支持中文
+        resConfigs "zh"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
+    }
+
+    productFlavors {
+        yingyongbao {}
+        xiaomi {}
+        baidu {}
+        huawei {}
+        wandoujia {}
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    signingConfigs {
+        config {
+            storeFile file('./keystore/health_knowledge.jks')
+            storePassword '123456'
+            keyAlias 'health'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            zipAlignEnabled true
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            zipAlignEnabled true
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            //开始输出
+            def file = output.outputFile
+            def newName = "";
+            def channelName = variant.productFlavors[0].name
+            def versionName = android.defaultConfig.versionName
+
+            if (output.zipAlign) {
+                newName = "develop" + "-" + channelName + "-" + versionName + "-release.apk"
+            } else {
+                newName = "develop" + "-" + channelName + "-" + versionName + "-release-unalign.apk"
+            }
+            output.outputFile = new File(file.parent, newName)
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:support-annotations:23.2.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    //加载中动画
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    //图片加载
+    compile 'com.facebook.fresco:fresco:0.13.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.12.0+'
+    //腾讯bugly管理bug
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //网络请求框架
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    //注解方式实现自动在布局中查找相应的视图
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    //内存泄漏分析
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //Tab滑动
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    //友盟统计
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.android.support:design:23.0.1'
+    //RecyclerView的Adapter,实现加载更多，加载动画，headerView ，footerView，事件点击等功能
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.6.9'
+}
+

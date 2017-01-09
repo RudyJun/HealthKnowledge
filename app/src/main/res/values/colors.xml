@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#FF4081</color>
+    <!--最浅（出现在顶部或底部）-->
+    <color name="topColor">#B4EEB4</color>
+    <color name="imageBackground">#f8fafb</color>
+    <color name="dividerColor">#ebeeef</color>
+    <color name="orange">#F15D4D</color>
+    <color name="loadingColor">#2B3E51</color>
+    <color name="ringColor">#f3f3f3</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+</resources>
