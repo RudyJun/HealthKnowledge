@@ -5,6 +5,6 @@ package com.knowledge.health;
  */
 
 public class Test {
-    private int a;
     private String s;
+    private int a;
 }
