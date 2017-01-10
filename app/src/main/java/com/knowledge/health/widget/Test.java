@@ -5,4 +5,5 @@ package com.knowledge.health.widget;
  */
 
 public class Test {
+  private int a;
 }
