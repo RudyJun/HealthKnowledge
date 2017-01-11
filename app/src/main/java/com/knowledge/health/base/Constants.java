@@ -7,8 +7,8 @@ import android.os.Environment;
  */
 public interface Constants {
 
-    String BASE_URL = "http://www.tngou.net/api/";
-
+    String BASE_URL = "http://www.tngou.net/";
+    String AVATAR_URL = "http://tnfs.tngou.net/img";
     //图片下载目录
     String DOWNLOAD_PHOTO_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
             + "/rudy/development/pictures/";

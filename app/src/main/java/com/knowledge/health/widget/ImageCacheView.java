@@ -66,7 +66,7 @@ public class ImageCacheView extends SimpleDraweeView {
         GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources())
                 .setFadeDuration(100)
                 .setBackground(ContextCompat.getDrawable(getContext(), backgroundColor))
-                .setPlaceholderImage(ContextCompat.getDrawable(getContext(), R.mipmap.image_loading));
+                .setPlaceholderImage(ContextCompat.getDrawable(getContext(), R.drawable.default_background));
         return builder;
     }
 

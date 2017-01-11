@@ -1,9 +1,11 @@
 package com.knowledge.health.module.me.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by RudyJun on 2017/1/9.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersonInfo {
 
     private String access_token;
@@ -17,19 +19,21 @@ public class PersonInfo {
     private String email;
     //       性别，1：男 0：女
     private int gender;
-    private int id;
+    //个性签名
+    private String signature;
+    private long id;
     //       用户积分
     private int integral;
     private int isemail;
     private int isphone;
     //       QQ ID
-    private String qqid;
+    private String qq;
     private boolean status;
     private long time;
     //      个性标题
     private String title;
     //      微博ID
-    private int weiboid;
+    private String weibo;
     private String msg;
 
     public String getAccess_token() {
@@ -80,11 +84,11 @@ public class PersonInfo {
         this.gender = gender;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -112,14 +116,6 @@ public class PersonInfo {
         this.isphone = isphone;
     }
 
-    public String getQqid() {
-        return qqid;
-    }
-
-    public void setQqid(String qqid) {
-        this.qqid = qqid;
-    }
-
     public boolean isStatus() {
         return status;
     }
@@ -144,20 +140,36 @@ public class PersonInfo {
         this.title = title;
     }
 
-    public int getWeiboid() {
-        return weiboid;
-    }
-
-    public void setWeiboid(int weiboid) {
-        this.weiboid = weiboid;
-    }
-
     public String getMsg() {
         return msg;
     }
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWeibo() {
+        return weibo;
+    }
+
+    public void setWeibo(String weibo) {
+        this.weibo = weibo;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     @Override
@@ -169,15 +181,16 @@ public class PersonInfo {
                 ", domain='" + domain + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
+                ", signature='" + signature + '\'' +
                 ", id=" + id +
                 ", integral=" + integral +
                 ", isemail=" + isemail +
                 ", isphone=" + isphone +
-                ", qqid='" + qqid + '\'' +
+                ", qq='" + qq + '\'' +
                 ", status=" + status +
                 ", time=" + time +
                 ", title='" + title + '\'' +
-                ", weiboid=" + weiboid +
+                ", weibo='" + weibo + '\'' +
                 ", msg='" + msg + '\'' +
                 '}';
     }

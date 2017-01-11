@@ -3,7 +3,6 @@ package com.knowledge.health.module.me.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +51,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
                 .setTextColor(Color.RED);
         titleBar.getRightView().setOnClickListener(this);
         titleBar.setBackFinish(this);
+        initInputContent();
+    }
+
+    private void initInputContent() {
         if (!StringUtil.isEmpty(userName) && !StringUtil.isEmpty(passWord)) {
             etUserName.setText(userName);
             etUserName.requestFocus();
@@ -92,8 +95,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
                     return;
                 }
                 showLoading("登陆中");
-                Log.e(TAG , "account = " +account);
-                Log.e(TAG , "password = " + password);
                 presenter.login(account, password);
                 break;
 
@@ -135,5 +136,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     public void loginFail(String errorMsg) {
         hideLoading();
         showToast(errorMsg);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        userName = intent.getStringExtra("userName");
+        passWord = intent.getStringExtra("password");
+        initInputContent();
     }
 }

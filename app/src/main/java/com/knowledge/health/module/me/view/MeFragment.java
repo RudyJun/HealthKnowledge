@@ -9,6 +9,7 @@ import com.knowledge.health.base.view.BaseFragment;
 import com.knowledge.health.module.me.presenter.MePresenter;
 import com.knowledge.health.module.me.view.inter.IMeView;
 import com.knowledge.health.util.LoginHelper;
+import com.knowledge.health.util.StringUtil;
 import com.knowledge.health.widget.CircleImageView;
 import com.knowledge.health.widget.TitleBar;
 
@@ -39,6 +40,9 @@ public class MeFragment extends BaseFragment<MePresenter> implements View.OnClic
     @BindView(R.id.tvUserName)
     TextView tvUserName;
 
+    @BindView(R.id.tvSignature)
+    TextView tvSignature;
+
     @BindView(R.id.tvLogOut)
     TextView tvLogOut;
 
@@ -50,23 +54,34 @@ public class MeFragment extends BaseFragment<MePresenter> implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
+        initUserInfo();
+    }
+
+    private void initUserInfo() {
         if (LoginHelper.getInstance().hasLogin()) {
             llWithoutLogin.setVisibility(View.GONE);
             tvUserName.setVisibility(View.VISIBLE);
             tvUserName.setText(LoginHelper.getInstance().getAccount());
             tvLogOut.setVisibility(View.VISIBLE);
+            tvSignature.setVisibility(View.VISIBLE);
+            if (StringUtil.isEmpty(LoginHelper.getInstance().getSignature())) {
+                tvSignature.setText("这人很懒，什么都没留下");
+            } else {
+                tvSignature.setText(LoginHelper.getInstance().getSignature());
+            }
+            ivAvatar.setImageSrc(LoginHelper.getInstance().getAvatar());
         } else {
             llWithoutLogin.setVisibility(View.VISIBLE);
             tvUserName.setVisibility(View.GONE);
             tvLogOut.setVisibility(View.GONE);
-
+            tvSignature.setVisibility(View.GONE);
+            ivAvatar.setImageResource(R.drawable.default_profile);
         }
     }
 
     @Override
     protected void initViews() {
         titleBar.setTitle("我的");
-        ivAvatar.setImageResource(R.drawable.default_profile);
     }
 
     @Override
@@ -74,6 +89,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements View.OnClic
         tvLogin.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         tvLogOut.setOnClickListener(this);
+        ivAvatar.setOnClickListener(this);
     }
 
     @Override
@@ -101,10 +117,17 @@ public class MeFragment extends BaseFragment<MePresenter> implements View.OnClic
 
             case R.id.tvLogOut:
                 LoginHelper.getInstance().logout();
-                llWithoutLogin.setVisibility(View.VISIBLE);
-                tvUserName.setVisibility(View.GONE);
-                tvLogOut.setVisibility(View.GONE);
+                initUserInfo();
                 showToast("退出登录");
+                break;
+
+            case R.id.ivAvatar:
+                if (!LoginHelper.getInstance().hasLogin()) {
+                    LoginHelper.getInstance().gotoLogin(activity);
+                    return;
+                }
+                intent = new Intent(activity, PersonalInfoActivity.class);
+                startActivity(intent);
                 break;
 
             default:

@@ -1,7 +1,5 @@
 package com.knowledge.health.module.me.model;
 
-import android.util.Log;
-
 import com.knowledge.health.base.config.GlobalConfig;
 import com.knowledge.health.base.exception.NetworkDisconnectException;
 import com.knowledge.health.base.model.ApiService;
@@ -22,7 +20,6 @@ public class LoginService {
     }
 
     public PersonInfo queryPersonInfo(String accessToken) throws IOException, NetworkDisconnectException {
-        Log.e("accessToken" , accessToken);
         ApiService apiService = RetrofitClient.getApiService();
         return RetrofitClient.getResult(apiService.queryPersonInfo(accessToken));
     }

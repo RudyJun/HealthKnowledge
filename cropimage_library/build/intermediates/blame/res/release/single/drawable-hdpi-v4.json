@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\HealthKnowledge\\cropimage_library\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\crop__divider.9.png",
+        "source": "D:\\HealthKnowledge\\cropimage_library\\src\\main\\res\\drawable-hdpi\\crop__divider.9.png"
+    },
+    {
+        "merged": "D:\\HealthKnowledge\\cropimage_library\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\crop__ic_done.png",
+        "source": "D:\\HealthKnowledge\\cropimage_library\\src\\main\\res\\drawable-hdpi\\crop__ic_done.png"
+    },
+    {
+        "merged": "D:\\HealthKnowledge\\cropimage_library\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\crop__ic_cancel.png",
+        "source": "D:\\HealthKnowledge\\cropimage_library\\src\\main\\res\\drawable-hdpi\\crop__ic_cancel.png"
+    }
+]

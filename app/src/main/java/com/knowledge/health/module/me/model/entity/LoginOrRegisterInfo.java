@@ -1,9 +1,11 @@
 package com.knowledge.health.module.me.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by RudyJun on 2017/1/9.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginOrRegisterInfo {
 
     private String access_token;

@@ -1,5 +1,7 @@
 package com.knowledge.health.module.me.presenter;
 
+import android.util.Log;
+
 import com.knowledge.health.base.exception.NetworkDisconnectException;
 import com.knowledge.health.base.presenter.BasePresenter;
 import com.knowledge.health.module.me.model.LoginService;
@@ -29,6 +31,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 try {
                     return service.login(account, password);
                 } catch (NetworkDisconnectException | IOException e) {
+                    Log.e("IOException1" , e.toString());
                     hideLoading();
                     throw e;
                 }
@@ -51,6 +54,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                             return personInfo;
                         }
                     } catch (NetworkDisconnectException | IOException e) {
+                        Log.e("IOException2" , e.toString());
                         hideLoading();
                         throw e;
                     }
