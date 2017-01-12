@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.knowledge.health.base.Constants;
 import com.knowledge.health.module.me.model.entity.PersonInfo;
 import com.knowledge.health.module.me.view.LoginActivity;
 
@@ -73,7 +74,7 @@ public class LoginHelper {
     public void saveLoginStatus(PersonInfo personInfo) {
         editor.putString(ACCESS_TOKEN, personInfo.getAccess_token());
         editor.putString(ACCOUNT, personInfo.getAccount());
-        editor.putString(AVATAR, personInfo.getAvatar());
+        editor.putString(AVATAR, Constants.AVATAR_URL + personInfo.getAvatar());
         editor.putString(EMAIL, personInfo.getEmail());
         editor.putString(TITLE, personInfo.getTitle());
         editor.putInt(GENDER, personInfo.getGender());

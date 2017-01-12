@@ -164,7 +164,7 @@ public class PersonalInfoActivity extends BaseActivity<PersonalInfoPresenter> im
                     personInfo.setQq(qq);
                     personInfo.setWeibo(weibo);
                     personInfo.setGender(gender);
-                    presenter.modiyPersonInfo(access_token, signature, gender, qq, weibo);
+                    presenter.modifyPersonInfo(access_token, signature, gender, qq, weibo);
                     showLoading("修改中");
                 } else if (hasChange) {
                     finish();

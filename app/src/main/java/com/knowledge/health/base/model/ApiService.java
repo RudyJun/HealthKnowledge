@@ -1,6 +1,8 @@
 package com.knowledge.health.base.model;
 
 
+import com.knowledge.health.module.discovery.model.entity.ClassifyDetail;
+import com.knowledge.health.module.discovery.model.entity.InfoDetail;
 import com.knowledge.health.module.index.model.entity.PhoneQuery;
 import com.knowledge.health.module.me.model.entity.LoginOrRegisterInfo;
 import com.knowledge.health.module.me.model.entity.PersonInfo;
@@ -57,4 +59,9 @@ public interface ApiService {
     @POST("api/user/portrait")
     Call<StateInfo> modifyAvatar(@Field("access_token") String accessToken, @Field("url") String url);
 
+    @GET("api/lore/list")
+    Call<ClassifyDetail> classifyDetail(@Query("id") String id, @Query("page") int page);
+
+    @GET("api/lore/show")
+    Call<InfoDetail> infoDetail(@Query("id") String id);
 }

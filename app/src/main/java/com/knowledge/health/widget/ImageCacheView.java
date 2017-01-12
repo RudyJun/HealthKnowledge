@@ -71,9 +71,6 @@ public class ImageCacheView extends SimpleDraweeView {
     }
 
     public void setImageSrc(String src) {
-        if (src == null) {
-            return;
-        }
         // Uri.parse 入参为null是会出现空指针异常
         imageSrc = null == src ? "" : src;
         setImageURI(Uri.parse(src));

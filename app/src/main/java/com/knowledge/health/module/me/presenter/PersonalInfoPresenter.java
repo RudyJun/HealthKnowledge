@@ -22,8 +22,8 @@ public class PersonalInfoPresenter extends BasePresenter<IPersonalInfoView> {
         service = new PersonalInfoService();
     }
 
-    public void modiyPersonInfo(final String access_token, final String signature, final int gender, final String qq, final String weibo) {
-        TaskManager.BackgroundTask modiyPersonInfoBackground = new TaskManager.BackgroundTask() {
+    public void modifyPersonInfo(final String access_token, final String signature, final int gender, final String qq, final String weibo) {
+        TaskManager.BackgroundTask modifyPersonInfoBackground = new TaskManager.BackgroundTask() {
             @Override
             public Object doWork(Object data) throws NetworkDisconnectException, IOException {
                 try {
@@ -50,7 +50,7 @@ public class PersonalInfoPresenter extends BasePresenter<IPersonalInfoView> {
         };
 
         new TaskManager()
-                .next(modiyPersonInfoBackground)
+                .next(modifyPersonInfoBackground)
                 .next(uiTask)
                 .start();
     }

@@ -37,6 +37,9 @@
         </activity>
 
         <activity android:name=".base.view.PreviewPictureActivity" />
+        <!--发现-->
+        <activity android:name=".module.discovery.view.InfoDetailActivity"/>
+        <!--发现END-->
 
         <!--我的-->
         <activity

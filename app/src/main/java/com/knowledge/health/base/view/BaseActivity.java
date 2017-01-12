@@ -21,6 +21,7 @@ import com.knowledge.health.base.AppManager;
 import com.knowledge.health.base.Constants;
 import com.knowledge.health.base.presenter.BasePresenter;
 import com.knowledge.health.util.NetUtil;
+import com.knowledge.health.util.StringUtil;
 import com.knowledge.health.util.SystemBarHelper;
 import com.knowledge.health.widget.LoadingDialog;
 import com.squareup.leakcanary.RefWatcher;
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * Created by RudyJun on 2016/11/23.
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView ,View.OnClickListener{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, View.OnClickListener {
 
     private LoadingDialog loadingDialog;
     protected T presenter;
@@ -61,9 +62,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         // 默认主色调为白色, 如果是6.0或者是miui6、flyme4以上, 设置状态栏文字为黑色, 否则给状态栏着色
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) || (SystemBarHelper.isFlyme4Later() || SystemBarHelper.isMIUI6Later())) {
             SystemBarHelper.setStatusBarDarkMode(this);
-            SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(this , R.color.topColor), 0f);
+            SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(this, R.color.topColor), 0f);
         } else {
-            SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(this , R.color.topColor));
+            SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(this, R.color.topColor));
         }
         setContentView(initResource());
         ButterKnife.bind(this);
@@ -113,9 +114,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (null == loadingDialog) {
             loadingDialog = new LoadingDialog(this);
         }
-        if (null != tip && !tip.trim().equals("")) {
-            loadingDialog.setContent(tip);
+        if (StringUtil.isEmpty(tip)) {
+            tip = "加载中";
         }
+        loadingDialog.setContent(tip);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.setCanceledOnTouchOutside(touchCancelable);
         loadingDialog.show();
